@@ -68,7 +68,7 @@ export default function TerminalView({ activeProject }: Props) {
           ))}
         </div>
         <div className="terminal-input-area">
-          <span className="prompt">{activeProject ? `${activeProject}$` : '$'} ></span>
+          <span className="prompt">{activeProject ? `${activeProject}$` : '$'}{' >'}</span>
           <input
             className="terminal-input"
             value={input}

@@ -9,10 +9,8 @@ services:
     environment:
       - PORT=3001
       - PROJECTS_DIR=/app/projects
-      - AI_API_KEY=${AI_API_KEY:-}
-      - AI_API_BASE_URL=${AI_API_API_BASE_URL:-https://api.openai.com/v1}
-      - AI_MODEL=${AI_MODEL:-gpt-4o}
     env_file:
+      - ./.env.base44-defaults
       - /run/base44/app.env
     command: ["sh", "-c", "npm install && npx nodemon src/index.js"]
     restart: on-failure
