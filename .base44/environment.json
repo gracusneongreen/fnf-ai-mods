@@ -1,0 +1,25 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    {
+      "name": "AI_API_KEY",
+      "description": "API key for your AI provider (OpenAI, Anthropic, or any OpenAI-compatible endpoint). Get it from your provider's dashboard (e.g. platform.openai.com/api-keys).",
+      "requiredAtBoot": false,
+      "generatedForDevelopment": false
+    },
+    {
+      "name": "AI_API_BASE_URL",
+      "description": "Base URL for the AI API. Defaults to https://api.openai.com/v1. Change for OpenAI-compatible providers (e.g. https://api.anthropic.com/v1).",
+      "requiredAtBoot": false,
+      "generatedForDevelopment": false
+    },
+    {
+      "name": "AI_MODEL",
+      "description": "Model name to use (e.g. gpt-4o, claude-3-5-sonnet-20241022). Defaults to gpt-4o.",
+      "requiredAtBoot": false,
+      "generatedForDevelopment": false
+    }
+  ]
+}
