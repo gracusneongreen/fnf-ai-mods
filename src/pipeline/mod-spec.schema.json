@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FNF AI Mod Spec",
+  "type": "object",
+  "required": ["mod", "song", "engine", "characters", "stage"],
+  "properties": {
+    "mod": {"type":"string","minLength":1},
+    "song": {
+      "type":"object","required":["name","bpm","durationSeconds","difficulty"],
+      "properties":{
+        "name":{"type":"string","minLength":1},
+        "bpm":{"type":"number","exclusiveMinimum":0},
+        "durationSeconds":{"type":"number","exclusiveMinimum":0},
+        "difficulty":{"type":"string","minLength":1}
+      }
+    },
+    "engine":{"type":"string","const":"Psych Engine 0.6.3"},
+    "characters":{
+      "type":"object","required":["player","opponent"],
+      "properties":{
+        "player":{"type":"string","minLength":1},
+        "opponent":{"type":"string","minLength":1},
+        "girlfriend":{"type":"string"}
+      }
+    },
+    "stage":{"type":"string","minLength":1},
+    "chart":{
+      "type":"object",
+      "properties":{
+        "seed":{"type":"integer"},
+        "notesPerSection":{"type":"integer","minimum":1,"maximum":64}
+      }
+    }
+  }
+}
