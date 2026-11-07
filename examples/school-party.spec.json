@@ -1,0 +1,20 @@
+{
+  "mod": "FNF Corruption",
+  "song": {
+    "name": "School Party",
+    "bpm": 150,
+    "durationSeconds": 180,
+    "difficulty": "Hard"
+  },
+  "engine": "Psych Engine 0.6.3",
+  "characters": {
+    "player": "boyfriend",
+    "opponent": "gracusneongreen",
+    "girlfriend": "gf"
+  },
+  "stage": "school",
+  "chart": {
+    "seed": 150150,
+    "notesPerSection": 4
+  }
+}
