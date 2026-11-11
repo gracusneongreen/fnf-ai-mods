@@ -1,0 +1,19 @@
+name: Chart import tests
+
+on:
+  push:
+    branches:
+      - feat/fnf-ai-charter-import-v0.4
+  pull_request:
+    branches:
+      - feat/ai-mod-pipeline-v0.2
+
+jobs:
+  node-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test tests/import-chart.test.mjs
