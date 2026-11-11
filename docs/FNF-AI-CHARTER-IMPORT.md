@@ -19,7 +19,7 @@ node src/pipeline/import-chart.mjs examples/school-party.spec.json .\school-part
 The result is written to:
 
 ```text
-build/FNF-Corruption/mods/FNF-Corruption/data/school-party/school-party.json
+build/fnf-corruption/mods/fnf-corruption/data/school-party/school-party.json
 ```
 
 The adapter preserves section timing, lane values, sustain lengths and `mustHitSection`. It applies the target spec's song ID, character IDs, girlfriend ID and stage name. It rejects BPM mismatches and malformed note data rather than silently exporting a chart that may drift out of sync.
