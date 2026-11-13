@@ -26,3 +26,21 @@ Open `index.html` in a modern browser, or enable GitHub Pages for the repository
 5. Add sandboxed validation, test launch, and build/export profiles.
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the module boundaries and safety requirements.
+
+
+## FNF agent workflow adapter (new branch)
+
+The branch feat/fnf-agent-workflow-v0.1 adds an FNF-specific AI modding workflow and a read-only project
+inspector for Psych Engine mod folders.
+
+Run the inspector with Python 3.10+:
+
+    py tools/fnf_modder/inspect_project.py "C:\Games\PsychEngine\mods" --out "reports\fnf-project.json"
+
+See:
+- skills/fnf-modder/SKILL.md for the agent workflow.
+- docs/UNIVERSAL-MODDER-FNF-ADAPTER.md for the integration plan.
+- tools/fnf_modder/README.md for inspector usage.
+
+This is an initial adapter slice, not a complete AI mod generator. The inspector is read-only and does not
+generate assets, create charts, launch Psych Engine or certify runtime compatibility.
