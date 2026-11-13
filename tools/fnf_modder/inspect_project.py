@@ -26,7 +26,8 @@ def inspect_mod(folder: Path) -> dict[str, Any]:
     charts = []
     warnings = []
     for path in by_ext[".json"]:
-        if "data" not in {part.lower() for part in path.parts}:
+        parts = {part.lower() for part in path.relative_to(folder).parts}
+        if "data" not in parts:
             continue
         data, error = load_json(path)
         if data is None:
@@ -45,6 +46,10 @@ def inspect_mod(folder: Path) -> dict[str, Any]:
         })
         if isinstance(song, dict) and song.get("bpm") is None:
             warnings.append("Chart has no BPM field: " + relative(path, folder))
+        if "data" in parts and path.parent.name.lower() not in {"stages", "characters"}:
+            audio = folder / "songs" / path.parent.name / "Inst.ogg"
+            if not audio.is_file():
+                warnings.append("No Inst.ogg found at " + relative(audio, folder))
 
     png_stems = {p.with_suffix("").as_posix().lower() for p in by_ext[".png"]}
     xml_stems = {p.with_suffix("").as_posix().lower() for p in by_ext[".xml"]}
@@ -53,12 +58,6 @@ def inspect_mod(folder: Path) -> dict[str, Any]:
     for stem in sorted(png_stems - xml_stems):
         if "/characters/" in stem.replace("\\", "/"):
             warnings.append("Character PNG without matching XML: " + stem)
-
-    ogg_paths = by_ext[".ogg"]
-    for path in by_ext[".json"]:
-        if "data" in {part.lower() for part in path.parts} and path.parent.name.lower() not in {"stages", "characters"}:
-            if not any(p.parent == path.parent and p.name.lower() == "inst.ogg" for p in ogg_paths):
-                warnings.append("No Inst.ogg beside chart: " + relative(path, folder))
 
     return {
         "name": folder.name, "root": str(folder.resolve()), "file_count": len(files),
@@ -83,7 +82,11 @@ def main() -> int:
         parser.error("Directory does not exist: " + str(root))
     if (root / "mods").is_dir():
         root = root / "mods"
-    folders = sorted(p for p in root.iterdir() if p.is_dir()) or [root]
+    common_mod_dirs = {"images", "data", "songs", "stages", "scripts", "custom_events"}
+    is_single_mod = any((root / name).is_dir() for name in common_mod_dirs)
+    folders = [root] if is_single_mod else sorted(p for p in root.iterdir() if p.is_dir())
+    if not folders:
+        folders = [root]
     report = {
         "format": "fnf-ai-mods-project-inspection", "version": 1,
         "engine_target": "Psych Engine; exact version must be verified separately",
