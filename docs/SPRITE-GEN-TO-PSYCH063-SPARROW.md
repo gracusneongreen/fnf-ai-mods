@@ -49,7 +49,7 @@ If the atlas path in the manifest is incorrect or the atlas is stored elsewhere,
   character-animations.json
 ```
 
-The XML uses sequential Sparrow frame names such as `idle0000`, `idle0001`, `singLEFT0000`. The JSON sidecar records `anim`, `name`, `fps`, `loop`, source state and frame count for each animation.
+The XML uses sequential Sparrow frame names such as `idle0000`, `idle0001`, `singLEFT0000`. The JSON sidecar records `anim`, `name`, `fps`, `loop`, source state and frame count for each animation. The converter does not copy the atlas PNG; copy that PNG into the intended mod asset folder too, or preserve the relative path recorded in `imagePath`.
 
 Psych Engine character JSON also needs project-specific values such as image path, scale, offsets, camera position and health icon. Review and merge the sidecar entries rather than replacing your character JSON wholesale.
 
