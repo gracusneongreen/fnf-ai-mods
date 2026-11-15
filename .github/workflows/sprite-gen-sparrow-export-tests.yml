@@ -1,0 +1,26 @@
+name: Sprite-gen Sparrow export tests
+
+on:
+  push:
+    branches:
+      - feat/sprite-gen-sparrow-export-v0.1
+    paths:
+      - 'tools/fnf_modder/convert_sprite_gen_to_sparrow.py'
+      - 'tests/test_sprite_gen_sparrow_export.py'
+      - '.github/workflows/sprite-gen-sparrow-export-tests.yml'
+  pull_request:
+    paths:
+      - 'tools/fnf_modder/convert_sprite_gen_to_sparrow.py'
+      - 'tests/test_sprite_gen_sparrow_export.py'
+      - '.github/workflows/sprite-gen-sparrow-export-tests.yml'
+
+jobs:
+  python-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run converter tests
+        run: python -m unittest discover -s tests -p 'test_sprite_gen_sparrow_export.py' -v
